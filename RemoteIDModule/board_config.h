@@ -14,6 +14,8 @@
 
 #define WS2812_LED_PIN GPIO_NUM_48
 
+#define HUM_LED_PIN GPIO_NUM_6
+
 #elif defined(BOARD_ESP32C3_DEV)
 #define BOARD_ID 2
 #define PIN_CAN_TX GPIO_NUM_5

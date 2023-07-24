@@ -24,6 +24,7 @@
 #include <esp_ota_ops.h>
 #include "efuse.h"
 #include "led.h"
+#include "hum_led.h"
 
 
 #if AP_DRONECAN_ENABLED
@@ -64,6 +65,9 @@ void setup()
 
     led.set_state(Led::LedState::INIT);
     led.update();
+
+    humled.set_state(g.self_id)
+    humled.update();
 
     if (g.webserver_enable) {
         // need WiFi for web server
@@ -175,7 +179,7 @@ static void set_data(Transport &t)
     const auto &operator_id = t.get_operator_id();
     const auto &basic_id = t.get_basic_id();
     const auto &system = t.get_system();
-    const auto &self_id = t.get_self_id();
+    const auto &self_id = g.self_id;
     const auto &location = t.get_location();
 
     odid_initUasData(&UAS_data);
