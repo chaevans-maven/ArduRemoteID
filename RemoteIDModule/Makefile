@@ -1,13 +1,13 @@
 # Makefile using arduino-cli
 
-ARDUINO_HOME=$(HOME)/.arduino15
+ARDUINO_HOME=$(HOME)/Library/Arduino15
 ESP32_VER=2.0.3
 ESP32_TOOLS=$(ARDUINO_HOME)/packages/esp32/hardware/esp32/$(ESP32_VER)/tools
 ESPTOOL=$(ESP32_TOOLS)/esptool.py
 
 ESP32_FQBN=esp32:esp32:$(CHIP)
 SERDEV := $(wildcard /dev/serial/by-id/usb-Espressif_*)
-ARDUINO_CLI=../bin/arduino-cli
+ARDUINO_CLI=arduino-cli
 APP_PARTITION_SIZE=2031616
 
 # ensure python tools are in $PATH

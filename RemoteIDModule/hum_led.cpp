@@ -16,37 +16,36 @@ void HumLed::init(void)
 #endif
 }
 
-void Led::update(void)
+void HumLed::update(void)
 {
     init();
+
+    onCounterMs = (onCounterMs + 1) % 200;
+
+    if (onCounterMs % 50 == 0) {
+        ledOn = (ledOn + 1) % 4;
+    }
+    if (onCounterMs == 0) {
+        colorOn = (colorOn + 1) % 3;
+    }
 
     const uint32_t now_ms = millis();
 
 #ifdef HUM_LED_PIN
     ledStrip.clear();
-
-    ledStrip.setPixelColor(0, ledStrip.Color(128, 0, 0))
-    ledStrip.setPixelColor(1, ledStrip.Color(128, 128, 0))
-    ledStrip.setPixelColor(2, ledStrip.Color(128, 128, 128))
-    ledStrip.setPixelColor(3, ledStrip.Color(128, 0, 128))
-    ledStrip.setPixelColor(4, ledStrip.Color(0, 128, 128))
-
-
-    switch (state) {
-    case LedState::ARM_OK:
-        ledStrip.setPixelColor(0, ledStrip.Color(0, 255, 0));
-        ledStrip.setPixelColor(0, ledStrip.Color(1, 255, 0)); //for db210pro, set the second LED to have the same output (for now)
-        break;
-
-    default:
-        ledStrip.setPixelColor(0, ledStrip.Color(255, 0, 0));
-        ledStrip.setPixelColor(1, ledStrip.Color(255, 0, 0)); //for db210pro, set the second LED to have the same output (for now)
-        break;
+    for (int i = 0; i < 4; i++) {
+        if (i == ledOn) {
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0], led[colorOn][1], led[colorOn][2]));
+        } else if ((i + 1) % 4 == ledOn) {
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0] / 4, led[colorOn][1] / 4, led[colorOn][2] / 4));
+        } else if ((i + 2) % 4 == ledOn) {
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0] / 8, led[colorOn][1] / 8, led[colorOn][2] / 8));
+        } else {
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0] / 16, led[colorOn][1] / 16, led[colorOn][2] / 16));
+        }
     }
-    if (now_ms - last_led_strip_ms >= 200) {
-        last_led_strip_ms = now_ms;
-        ledStrip.show();
-    }
+
+    ledStrip.show();
 #endif
 }
 
