@@ -36,7 +36,7 @@ public:
     char wifi_password[21] = "ArduRemoteID";
     uint8_t wifi_channel = 6;
     uint8_t options;
-    char self_id[23] = "AID120823.A4gVCA1fz.9";
+    char my_self_id[23] = "AID120823.q4g0wwk92.5";
     struct {
         char b64_key[64];
     } public_keys[MAX_PUBLIC_KEYS];

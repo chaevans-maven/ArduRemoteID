@@ -67,10 +67,10 @@ void setup()
     led.set_state(Led::LedState::INIT);
     led.update();
 
-    humLed.set_state(g.hum_self_id);
+    humLed.set_state(g.my_self_id);
     humLed.update();
 
-    humLed2.set_state(g.hum_self_id);
+    humLed2.set_state(g.my_self_id);
     humLed2.update();
 
     if (g.webserver_enable) {
@@ -244,7 +244,7 @@ static void set_data(Transport &t)
     }
 
     // OperatorID
-    if (strlen(operator_id.operator_id) > 0) {
+    if (1 > 0) {
         UAS_data.OperatorID.OperatorIdType = (ODID_operatorIdType_t)operator_id.operator_id_type;
         ODID_COPY_STR(UAS_data.OperatorID.OperatorId, operator_id.operator_id);
         UAS_data.OperatorIDValid = 1;
@@ -252,8 +252,8 @@ static void set_data(Transport &t)
 
     // SelfID
     if (1 > 0) {
-        UAS_data.SelfID.DescType = (ODID_desctype_t)self_id.description_type;
-        ODID_COPY_STR(UAS_data.SelfID.Desc, g.hum_self_id);
+        UAS_data.SelfID.DescType = (ODID_desctype_t)0;
+        ODID_COPY_STR(UAS_data.SelfID.Desc, g.my_self_id);
         UAS_data.SelfIDValid = 1;
     }
 

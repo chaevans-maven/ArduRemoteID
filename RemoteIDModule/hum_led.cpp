@@ -35,13 +35,13 @@ void HumLed::update(void)
     ledStrip.clear();
     for (int i = 0; i < 4; i++) {
         if (i == ledOn) {
-            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0], led[colorOn][1], led[colorOn][2]));
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][1], led[colorOn][0], led[colorOn][2]));
         } else if ((i + 1) % 4 == ledOn) {
-            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0] / 4, led[colorOn][1] / 4, led[colorOn][2] / 4));
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][1] / 4, led[colorOn][0] / 4, led[colorOn][2] / 4));
         } else if ((i + 2) % 4 == ledOn) {
-            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0] / 8, led[colorOn][1] / 8, led[colorOn][2] / 8));
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][1] / 8, led[colorOn][0] / 8, led[colorOn][2] / 8));
         } else {
-            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][0] / 16, led[colorOn][1] / 16, led[colorOn][2] / 16));
+            ledStrip.setPixelColor(i, ledStrip.Color(led[colorOn][1] / 16, led[colorOn][0] / 16, led[colorOn][2] / 16));
         }
     }
 
