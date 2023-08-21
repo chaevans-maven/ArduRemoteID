@@ -24,8 +24,8 @@
 #include <esp_ota_ops.h>
 #include "efuse.h"
 #include "led.h"
-#include "hum_led.h"
-#include "hum_led_2.h"
+#include "color_aid_led.h"
+#include "flash_aid_led.h"
 
 
 #if AP_DRONECAN_ENABLED
@@ -67,11 +67,13 @@ void setup()
     led.set_state(Led::LedState::INIT);
     led.update();
 
-    humLed.set_state(g.my_self_id);
-    humLed.update();
+#if AID_LEDS_ENABLED
+    colorAidLed.set_state(g.my_self_id);
+    colorAidLed.update();
 
-    humLed2.set_state(g.my_self_id);
-    humLed2.update();
+    flashAidLed.set_state(g.my_self_id);
+    flashAidLed.update();
+#endif
 
     if (g.webserver_enable) {
         // need WiFi for web server
@@ -346,9 +348,10 @@ void loop()
     const uint32_t last_system_ms = transport.get_last_system_ms();
 
     led.update();
-    humLed.update();
-    humLed2.update();
-
+#if AID_LEDS_ENABLED
+    colorAidLed.update();
+    flashAidLed.update();
+#endif
     status_reason = "";
 
     if (last_location_ms == 0 ||

@@ -10,3 +10,5 @@
 
 // do we support MAVLink connnection to flight controller?
 #define AP_MAVLINK_ENABLED 1
+
+#define AID_LEDS_ENABLED defined(AID_LED_COLOR_PIN) && defined(AID_LED_FLASH_PIN)
