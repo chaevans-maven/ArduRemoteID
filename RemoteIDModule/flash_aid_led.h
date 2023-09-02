@@ -7,6 +7,7 @@
 class FlashAidLed {
 public:
     void set_state(char self_id[24]) {
+        // Extracting the flash pattern from the Self-Id message
         pattern = self_id[20];
         codeCurrent = 0;
         counter = 0;

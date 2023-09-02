@@ -67,7 +67,7 @@ void setup()
     led.set_state(Led::LedState::INIT);
     led.update();
 
-#if AID_LEDS_ENABLED
+#if AID_LEDS_ENABLED // enabled if GPIO pins have been configured for both LED sets
     colorAidLed.set_state(g.my_self_id);
     colorAidLed.update();
 
